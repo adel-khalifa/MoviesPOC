@@ -10,11 +10,20 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
+import com.adel.moviespoc.data.MoviesService
 import com.adel.moviespoc.ui.theme.MoviesPOCTheme
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val service: MoviesService by inject()
+        lifecycleScope.launchWhenCreated {
+            service.fetchMovies()
+        }
         setContent {
             MoviesPOCTheme {
                 // A surface container using the 'background' color from the theme
