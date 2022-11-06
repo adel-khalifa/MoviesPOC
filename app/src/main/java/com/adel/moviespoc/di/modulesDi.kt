@@ -1,8 +1,8 @@
 package com.adel.moviespoc.di
 
 import com.adel.moviespoc.BuildConfig
-import com.adel.moviespoc.data.KeyInterceptor
-import com.adel.moviespoc.data.MoviesService
+import com.adel.moviespoc.data.interceptors.KeyInterceptor
+import com.adel.moviespoc.data.services.MoviesService
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
