@@ -1,11 +1,12 @@
 package com.adel.moviespoc.domain.repositories
 
-import com.adel.moviespoc.domain.entities.Movie
-import com.adel.moviespoc.domain.entities.MovieDetails
-import kotlinx.coroutines.flow.Flow
+import arrow.core.Either
+import com.adel.moviespoc.data.models.AppFailure
+import com.adel.moviespoc.domain.models.Movie
+import com.adel.moviespoc.domain.models.MovieDetails
 
 interface MoviesRepository {
 
-    fun getMoviesList(): Flow<List<Movie>>
-    fun getMovieById(): Flow<MovieDetails>
+    suspend fun getMoviesList(): Either<AppFailure, List<Movie>>
+    suspend fun getMovieById(): Either<AppFailure, MovieDetails>
 }

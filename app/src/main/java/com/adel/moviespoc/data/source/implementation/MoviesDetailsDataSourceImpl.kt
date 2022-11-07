@@ -1,12 +1,13 @@
 package com.adel.moviespoc.data.source.implementation
 
+import arrow.core.Either
+import com.adel.moviespoc.data.models.AppFailure
 import com.adel.moviespoc.data.services.MoviesService
 import com.adel.moviespoc.data.source.interfaces.MoviesDetailsDataSource
-import com.adel.moviespoc.domain.entities.MovieDetails
-import kotlinx.coroutines.flow.Flow
+import com.adel.moviespoc.domain.models.MovieDetails
 
 class MoviesDetailsDataSourceImpl(val moviesService: MoviesService) : MoviesDetailsDataSource {
-    override fun getMovieDetails(): Flow<MovieDetails> {
+    override suspend fun getMovieDetails(): Either<AppFailure, MovieDetails> {
         TODO("Not yet implemented")
     }
 }

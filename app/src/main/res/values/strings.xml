@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MoviesPOC</string>
+    <string name="error_not_authorized">You are not authorized</string>
+    <string name="error_server_busy">Server Busy!</string>
+    <string name="error_general">Something went wrong!</string>
+    <string name="error_network">Check your internet connection</string>
 </resources>

@@ -1,8 +1,9 @@
 package com.adel.moviespoc.data.source.interfaces
 
-import com.adel.moviespoc.domain.entities.Movie
-import kotlinx.coroutines.flow.Flow
+import arrow.core.Either
+import com.adel.moviespoc.data.models.AppFailure
+import com.adel.moviespoc.domain.models.Movie
 
 interface MoviesListDataSource {
-    fun getMoviesList(): Flow<List<Movie>>
+    suspend fun getMoviesList(): Either<AppFailure, List<Movie>>
 }
