@@ -1,14 +1,13 @@
 package com.adel.moviespoc.data.mapper
 
-import android.util.Log
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import com.adel.moviespoc.R
-import com.adel.moviespoc.data.models.AppFailure
-import com.adel.moviespoc.data.models.ErrorMessage
+import com.adel.moviespoc.data.models.*
 import retrofit2.HttpException
 import retrofit2.Response
+import timber.log.Timber
 import java.io.IOException
 
 
@@ -18,12 +17,13 @@ suspend fun <T> safeCall(
     return try {
         call()
     } catch (e: Throwable) {
-        Log.i("Network-exception-logs", e.message.toString())
+        Timber.tag("Network-exception-logs").i(e.message.toString())
         e.toFailure().left()
     }
 }
 
 fun <T, R> Response<T>.mapResponseData(transform: (T) -> R?): Either<AppFailure, R> {
+
     val responseBody = body()
     val responseMessage = message()
 
@@ -32,6 +32,23 @@ fun <T, R> Response<T>.mapResponseData(transform: (T) -> R?): Either<AppFailure,
 
     return handleErrorCode(responseMessage).left()
 
+}
+
+fun <T> Response<MoviesResponse>.mapPaginatedMovies(
+    transform: (RemoteMovie) -> T?
+): Either<AppFailure, PaginatedResponse<T>> {
+
+    val body = body()
+    val message = message()
+    val data = body?.results
+    return if (
+        isSuccessful && body != null && body.page != null && body.totalPages != null && data != null) Either.Right(
+        PaginatedResponse(
+            page = CurrentPage(body.page),
+            totalPages = TotalPages(body.totalPages),
+            list = data.mapNotNull { element -> element?.let { transform(it) } }
+        )
+    ) else handleErrorCode(message).left()
 }
 
 

@@ -15,7 +15,7 @@
         android:theme="@style/Theme.MoviesPOC"
         tools:targetApi="31">
         <activity
-            android:name=".ui.screens.MainActivity"
+            android:name=".ui.screens.host.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MoviesPOC">
             <intent-filter>

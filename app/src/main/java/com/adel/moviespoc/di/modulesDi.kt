@@ -9,11 +9,11 @@ import com.adel.moviespoc.data.source.interfaces.MoviesDetailsDataSource
 import com.adel.moviespoc.data.source.interfaces.MoviesListDataSource
 import com.adel.moviespoc.domain.repositories.MoviesRepository
 import com.adel.moviespoc.domain.repositories.MoviesRepositoryImpl
-import com.adel.moviespoc.ui.screens.MoviesViewModel
+import com.adel.moviespoc.ui.screens.list.MoviesListViewModel
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -29,7 +29,9 @@ val networkModule = module {
     single<MoviesListDataSource> { MoviesListDataSourceImpl(get()) }
     single<MoviesDetailsDataSource> { MoviesDetailsDataSourceImpl(get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(get(), get()) }
-    viewModel { MoviesViewModel(get()) }
+//    viewModel { MoviesViewModel(get()) }
+    viewModelOf(::MoviesListViewModel)
+
 
 }
 
