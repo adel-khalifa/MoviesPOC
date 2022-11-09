@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class MoviesResponse(
     val page: Int? = null,
-    val results: List<RemoteMovie?>? = null,
+    val results: List<MovieDto?>? = null,
     @Json(name = "total_pages")
     val totalPages: Int? = null,
     @Json(name = "total_results")
@@ -15,7 +15,7 @@ data class MoviesResponse(
 )
 
 @JsonClass(generateAdapter = true)
-data class RemoteMovie(
+data class MovieDto(
     val adult: Boolean? = null,
     @Json(name = "backdrop_path")
     val backdropPath: String? = null,

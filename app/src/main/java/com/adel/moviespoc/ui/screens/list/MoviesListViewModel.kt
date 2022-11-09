@@ -9,6 +9,7 @@ import arrow.core.Either
 import com.adel.moviespoc.data.models.CurrentPage
 import com.adel.moviespoc.data.models.ErrorMessage
 import com.adel.moviespoc.domain.repositories.MoviesRepository
+import com.adel.moviespoc.ui.mapper.toMovie
 import com.adel.moviespoc.ui.screens.list.ListScreenAction.FetchMovies
 import com.adel.moviespoc.ui.screens.list.ListScreenAction.LoadMore
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -20,6 +21,7 @@ class MoviesListViewModel(
 ) : ViewModel() {
 
     var listScreenState by mutableStateOf<ListScreenState>(ListScreenState.Success())
+        private set
 
     private val _effects = MutableSharedFlow<ErrorMessage?>()
     val effects: SharedFlow<ErrorMessage?> = _effects
@@ -42,7 +44,7 @@ class MoviesListViewModel(
                 ListScreenState.Error(response.value.message)
             }
             is Either.Right -> ListScreenState.Success(
-                movies = response.value.list,
+                movies = response.value.list.mapNotNull { it.toMovie() },
                 currentPage = response.value.page,
                 totalPages = response.value.totalPages,
                 isLoading = false
@@ -58,12 +60,19 @@ class MoviesListViewModel(
 
             viewModelScope.launch {
                 listScreenState = currentState.copy(isLoading = true)
+
                 val nextPage = CurrentPage(currentState.currentPage.value + 1)
                 when (val response = moviesRepo.getMoviesList(nextPage)) {
-                    is Either.Left -> _effects.emit(response.value.message)
+
+                    is Either.Left -> {
+                        _effects.emit(response.value.message)
+                        listScreenState = currentState.copy(isLoading = false)
+                    }
 
                     is Either.Right -> {
-                        val newList = currentState.movies.toMutableList().plus(response.value.list)
+                        val receivedList = response.value.list.mapNotNull { it.toMovie() }
+                        val newList = currentState.movies.toMutableList().plus(receivedList)
+
                         listScreenState = currentState.copy(
                             movies = newList.toList(),
                             currentPage = response.value.page,

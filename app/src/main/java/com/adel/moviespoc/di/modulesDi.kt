@@ -9,6 +9,7 @@ import com.adel.moviespoc.data.source.interfaces.MoviesDetailsDataSource
 import com.adel.moviespoc.data.source.interfaces.MoviesListDataSource
 import com.adel.moviespoc.domain.repositories.MoviesRepository
 import com.adel.moviespoc.domain.repositories.MoviesRepositoryImpl
+import com.adel.moviespoc.ui.screens.details.DetailsViewModel
 import com.adel.moviespoc.ui.screens.list.MoviesListViewModel
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -29,8 +30,8 @@ val networkModule = module {
     single<MoviesListDataSource> { MoviesListDataSourceImpl(get()) }
     single<MoviesDetailsDataSource> { MoviesDetailsDataSourceImpl(get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(get(), get()) }
-//    viewModel { MoviesViewModel(get()) }
     viewModelOf(::MoviesListViewModel)
+    viewModelOf(::DetailsViewModel)
 
 
 }

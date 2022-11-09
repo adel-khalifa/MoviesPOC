@@ -5,6 +5,8 @@ sealed class AppFailure {
     abstract val message: ErrorMessage?
 
     data class Unauthorized(override val message: ErrorMessage? = null) : AppFailure()
+    data class NotFound(override val message: ErrorMessage? = null) : AppFailure()
+    data class AccessDenied(override val message: ErrorMessage? = null) : AppFailure()
     data class ServerError(override val message: ErrorMessage? = null) : AppFailure()
     data class NetworkConnection(override val message: ErrorMessage? = null) : AppFailure()
     data class General(override val message: ErrorMessage? = null) : AppFailure()

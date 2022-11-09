@@ -7,6 +7,10 @@ value class CurrentPage(val value: Int)
 value class TotalPages(val value: Int)
 
 
+@JvmInline
+value class MovieId(val value: Int)
+
+
 data class PaginatedResponse<T>(
     val page: CurrentPage,
     val totalPages: TotalPages,

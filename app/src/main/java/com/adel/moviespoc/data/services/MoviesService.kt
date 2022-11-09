@@ -1,6 +1,6 @@
 package com.adel.moviespoc.data.services
 
-import com.adel.moviespoc.data.models.MovieDetailsResponse
+import com.adel.moviespoc.data.models.MovieDetailsDto
 import com.adel.moviespoc.data.models.MoviesResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -16,6 +16,6 @@ interface MoviesService {
     @GET("movie/{movie_id}")
     suspend fun fetchMovieById(
         @Path(value = "movie_id") movieId: Int
-    ): Response<MovieDetailsResponse>
+    ): Response<MovieDetailsDto>
 
 }

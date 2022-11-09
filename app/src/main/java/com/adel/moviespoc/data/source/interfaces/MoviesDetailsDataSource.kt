@@ -2,8 +2,9 @@ package com.adel.moviespoc.data.source.interfaces
 
 import arrow.core.Either
 import com.adel.moviespoc.data.models.AppFailure
-import com.adel.moviespoc.domain.entities.MovieDetails
+import com.adel.moviespoc.data.models.MovieDetailsDto
+import com.adel.moviespoc.data.models.MovieId
 
 interface MoviesDetailsDataSource {
-    suspend fun getMovieDetails(): Either<AppFailure, MovieDetails>
+    suspend fun getMovieDetails(movieId: MovieId): Either<AppFailure, MovieDetailsDto>
 }

@@ -53,7 +53,11 @@ fun MyAppNavHost(
         composable(
             route = "details/{movieId}",
             arguments = listOf(navArgument("movieId") { type = NavType.IntType })
-        ) { DetailsScreen(name = it.arguments?.getInt("movieId") ?: 0) }
+        ) {
+            DetailsScreen(movieId = it.arguments?.getInt("movieId") ?: 0) {
+                navController.popBackStack()
+            }
+        }
     }
 }
 
