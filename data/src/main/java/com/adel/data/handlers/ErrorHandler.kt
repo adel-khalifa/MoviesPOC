@@ -3,8 +3,8 @@ package com.adel.data.handlers
 import arrow.core.Either
 import arrow.core.left
 import com.adel.data.R
-import com.adel.data.models.AppFailure
-import com.adel.data.models.ErrorMessage
+import com.adel.models.AppFailure
+import com.adel.models.ErrorMessage
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException

@@ -4,7 +4,13 @@ import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import com.adel.data.R
-import com.adel.data.models.*
+import com.adel.data.models.MovieDto
+import com.adel.data.models.MoviesResponse
+import com.adel.data.models.PaginatedResponse
+import com.adel.models.AppFailure
+import com.adel.models.ErrorMessage
+import com.adel.models.values.CurrentPage
+import com.adel.models.values.TotalPages
 import retrofit2.Response
 
 

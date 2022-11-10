@@ -15,6 +15,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.adel.models.ErrorMessage
 import com.adel.presentation.components.ErrorView
 import com.adel.presentation.components.LoadingComponent
 import com.adel.presentation.components.MovieItem
@@ -67,7 +68,7 @@ fun ListScreen(
 }
 
 @Composable
-fun RenderErrorState(message: com.adel.data.models.ErrorMessage?, onTryAgain: () -> Unit) {
+fun RenderErrorState(message: ErrorMessage?, onTryAgain: () -> Unit) {
     ErrorView(LocalContext.current.extractErrorMessage(message), onTryAgain = onTryAgain)
 }
 
@@ -96,7 +97,6 @@ fun RenderSuccessState(
                     MovieItem(movie = movie) { onNavigateToDetails(movie.id) }
                 }
             )
-
         }
     }
 

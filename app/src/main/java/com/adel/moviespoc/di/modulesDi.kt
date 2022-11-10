@@ -1,8 +1,14 @@
 package com.adel.moviespoc.di
 
-import com.adel.bussiness.repositories.MoviesRepository
-import com.adel.bussiness.repositories.MoviesRepositoryImpl
 import com.adel.data.BuildConfig
+import com.adel.data.interceptors.KeyInterceptor
+import com.adel.data.services.MoviesService
+import com.adel.data.source.implementation.MoviesDetailsDataSourceImpl
+import com.adel.data.source.implementation.MoviesListDataSourceImpl
+import com.adel.data.source.interfaces.MoviesDetailsDataSource
+import com.adel.data.source.interfaces.MoviesListDataSource
+import com.adel.domain.repositories.MoviesRepository
+import com.adel.domain.repositories.MoviesRepositoryImpl
 import com.adel.presentation.screens.details.DetailsViewModel
 import com.adel.presentation.screens.list.MoviesListViewModel
 import com.squareup.moshi.Moshi
@@ -17,17 +23,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 val networkModule = module {
     single { moshi() }
     single { okHttpClient(get()) }
-    single { com.adel.data.interceptors.KeyInterceptor() }
+    single { KeyInterceptor() }
     single { retrofit(BuildConfig.SERVER_URL, get(), get()) }
     single { createMovieService(get()) }
 
-    single<com.adel.data.source.interfaces.MoviesListDataSource> {
-        com.adel.data.source.implementation.MoviesListDataSourceImpl(
+    single<MoviesListDataSource> {
+        MoviesListDataSourceImpl(
             get()
         )
     }
-    single<com.adel.data.source.interfaces.MoviesDetailsDataSource> {
-        com.adel.data.source.implementation.MoviesDetailsDataSourceImpl(
+    single<MoviesDetailsDataSource> {
+        MoviesDetailsDataSourceImpl(
             get()
         )
     }
@@ -53,7 +59,7 @@ fun retrofit(baseUrl: String, okHtpClient: OkHttpClient, moshi: Moshi): Retrofit
         .build()
 }
 
-private fun okHttpClient(keyInterceptor: com.adel.data.interceptors.KeyInterceptor): OkHttpClient {
+private fun okHttpClient(keyInterceptor: KeyInterceptor): OkHttpClient {
     val logging = HttpLoggingInterceptor()
     logging.setLevel(HttpLoggingInterceptor.Level.BODY)
     return OkHttpClient.Builder().addInterceptor(logging).addInterceptor(keyInterceptor).build()
@@ -64,6 +70,6 @@ private fun moshi(): Moshi {
 }
 
 
-fun createMovieService(retrofit: Retrofit): com.adel.data.services.MoviesService {
-    return retrofit.create(com.adel.data.services.MoviesService::class.java)
+fun createMovieService(retrofit: Retrofit): MoviesService {
+    return retrofit.create(MoviesService::class.java)
 }

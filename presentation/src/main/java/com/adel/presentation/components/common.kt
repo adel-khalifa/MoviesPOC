@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.adel.models.entities.Movie
+import com.adel.models.Movie
 import com.adel.presentation.R
 
 
@@ -105,7 +105,7 @@ fun RateSection(vote: Double) {
         Spacer(modifier = Modifier.width(2.dp))
         CustomText(
             text = "${vote.toInt()}/10", color = MaterialTheme.colors.onBackground,
-            textSize = 10.sp
+            textSize = 12.sp
         )
 
     }

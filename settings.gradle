@@ -16,5 +16,5 @@ rootProject.name = "MoviesPOC"
 include ':app'
 include ':data'
 include ':presentation'
-include ':bussiness'
+include ':domain'
 include ':models'

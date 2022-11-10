@@ -1,12 +1,13 @@
 package com.adel.presentation.screens.list
 
-import com.adel.data.models.CurrentPage
-import com.adel.data.models.ErrorMessage
-import com.adel.data.models.TotalPages
+import com.adel.models.ErrorMessage
+import com.adel.models.Movie
+import com.adel.models.values.CurrentPage
+import com.adel.models.values.TotalPages
 
 sealed class ListScreenState() {
     data class Success(
-        val movies: List<com.adel.models.entities.Movie> = emptyList(),
+        val movies: List<Movie> = emptyList(),
         val currentPage: CurrentPage = CurrentPage(1),
         val totalPages: TotalPages = TotalPages(1),
         val isLoading: Boolean = true

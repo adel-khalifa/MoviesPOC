@@ -3,11 +3,11 @@ package com.adel.data.source.implementation
 import arrow.core.Either
 import com.adel.data.handlers.handleResponse
 import com.adel.data.handlers.safeCall
-import com.adel.data.models.AppFailure
 import com.adel.data.models.MovieDetailsDto
-import com.adel.data.models.MovieId
 import com.adel.data.services.MoviesService
 import com.adel.data.source.interfaces.MoviesDetailsDataSource
+import com.adel.models.AppFailure
+import com.adel.models.values.MovieId
 
 class MoviesDetailsDataSourceImpl(private val moviesService: MoviesService) :
     MoviesDetailsDataSource {

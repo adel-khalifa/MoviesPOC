@@ -1,7 +1,7 @@
 package com.adel.presentation.screens.util
 
 import android.content.Context
-import com.adel.data.models.ErrorMessage
+import com.adel.models.ErrorMessage
 import com.adel.presentation.R
 
 fun Context.extractErrorMessage(failure: ErrorMessage?): String {

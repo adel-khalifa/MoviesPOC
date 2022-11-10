@@ -7,8 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either
-import com.adel.bussiness.mapper.toMovieDetails
-import com.adel.bussiness.repositories.MoviesRepository
+import com.adel.domain.mapper.toMovieDetails
+import com.adel.domain.repositories.MoviesRepository
+import com.adel.models.ErrorMessage
+import com.adel.models.values.MovieId
 import com.adel.presentation.screens.details.DetailsScreenState.Error
 import com.adel.presentation.screens.details.DetailsScreenState.Success
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -20,8 +22,8 @@ class DetailsViewModel(private val moviesRepo: MoviesRepository) : ViewModel() {
     var detailsState by mutableStateOf<DetailsScreenState>(Success())
         private set
 
-    private val _effects = MutableSharedFlow<com.adel.data.models.ErrorMessage?>()
-    val effects: MutableSharedFlow<com.adel.data.models.ErrorMessage?> = _effects
+    private val _effects = MutableSharedFlow<ErrorMessage?>()
+    val effects: MutableSharedFlow<ErrorMessage?> = _effects
 
 
     // just one exposed API to UI-Component/Controller
@@ -32,7 +34,7 @@ class DetailsViewModel(private val moviesRepo: MoviesRepository) : ViewModel() {
     }
 
 
-    private fun getMovieDetails(id: com.adel.data.models.MovieId) = viewModelScope.launch {
+    private fun getMovieDetails(id: MovieId) = viewModelScope.launch {
         val currentState = detailsState
         showLoading(currentState)
 

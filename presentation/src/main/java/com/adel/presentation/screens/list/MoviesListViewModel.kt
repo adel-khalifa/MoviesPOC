@@ -7,8 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either
-import com.adel.bussiness.mapper.toMovie
-import com.adel.bussiness.repositories.MoviesRepository
+import com.adel.domain.mapper.toMovie
+import com.adel.domain.repositories.MoviesRepository
+import com.adel.models.ErrorMessage
+import com.adel.models.values.CurrentPage
 import com.adel.presentation.screens.list.ListScreenAction.FetchMovies
 import com.adel.presentation.screens.list.ListScreenAction.LoadMore
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,8 +24,8 @@ class MoviesListViewModel(
     var listScreenState by mutableStateOf<ListScreenState>(ListScreenState.Success())
         private set
 
-    private val _effects = MutableSharedFlow<com.adel.data.models.ErrorMessage?>()
-    val effects: SharedFlow<com.adel.data.models.ErrorMessage?> = _effects
+    private val _effects = MutableSharedFlow<ErrorMessage?>()
+    val effects: SharedFlow<ErrorMessage?> = _effects
 
     init {
         dispatch(FetchMovies)
@@ -38,7 +40,7 @@ class MoviesListViewModel(
 
     private fun fetchMovies() = viewModelScope.launch {
         listScreenState = when (val response = moviesRepo.getMoviesList(
-            com.adel.data.models.CurrentPage(
+            CurrentPage(
                 1
             )
         )) {
@@ -64,7 +66,7 @@ class MoviesListViewModel(
             viewModelScope.launch {
                 listScreenState = currentState.copy(isLoading = true)
 
-                val nextPage = com.adel.data.models.CurrentPage(currentState.currentPage.value + 1)
+                val nextPage = CurrentPage(currentState.currentPage.value + 1)
                 when (val response = moviesRepo.getMoviesList(nextPage)) {
 
                     is Either.Left -> {

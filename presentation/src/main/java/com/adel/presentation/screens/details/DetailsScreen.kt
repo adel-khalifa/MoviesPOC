@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.adel.data.models.MovieId
+import com.adel.models.values.MovieId
 import com.adel.presentation.R
 import com.adel.presentation.components.*
 import com.adel.presentation.screens.list.RenderErrorState
