@@ -71,7 +71,6 @@ dependencies {
 
     // koin -DI
     implementation "io.insert-koin:koin-android:3.3.0"
-    implementation "io.insert-koin:koin-androidx-compose:3.3.0"
 
 
 
