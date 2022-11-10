@@ -15,6 +15,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -64,7 +65,9 @@ fun MovieItem(modifier: Modifier = Modifier, movie: Movie, onMovieClicked: (id: 
 
         RemoteImage(
             url = movie.posterUrl,
-            modifier = Modifier.size(80.dp)
+            modifier = Modifier
+                .size(80.dp)
+                .clip(RoundedCornerShape(percent = 8))
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column(

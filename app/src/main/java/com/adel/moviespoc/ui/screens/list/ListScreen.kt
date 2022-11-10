@@ -91,7 +91,7 @@ fun RenderSuccessState(
                 onLoadMore = onLoadMore,
                 listState = listState,
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(0.dp),
+                contentPadding = PaddingValues(12.dp),
                 canLoadMore = uiState.currentPage.value < uiState.totalPages.value,
                 content = { movie ->
                     MovieItem(movie = movie) { onNavigateToDetails(movie.id) }
