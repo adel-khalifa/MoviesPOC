@@ -1,16 +1,4 @@
 <resources>
     <string name="app_name">MoviesPOC</string>
-    <string name="error_not_authorized">You are not authorized</string>
-    <string name="error_server_busy">Server Busy!</string>
-    <string name="error_general">Something went wrong!</string>
-    <string name="error_network">Check your internet connection</string>
-    <string name="no_result">No Result!</string>
-    <string name="error_occurred">Error Occurred</string>
-    <string name="try_again">Try again</string>
-    <string name="url_not_found">URL is not found!</string>
-    <string name="access_denied">Access denied</string>
-    <string name="overview">Overview</string>
-    <string name="genres">Genres</string>
-    <string name="producers">Producers</string>
-    <string name="show_more">Show more…</string>
+
 </resources>

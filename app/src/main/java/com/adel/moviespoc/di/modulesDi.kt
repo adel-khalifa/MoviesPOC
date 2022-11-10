@@ -1,16 +1,10 @@
 package com.adel.moviespoc.di
 
-import com.adel.moviespoc.BuildConfig
-import com.adel.moviespoc.data.interceptors.KeyInterceptor
-import com.adel.moviespoc.data.services.MoviesService
-import com.adel.moviespoc.data.source.implementation.MoviesDetailsDataSourceImpl
-import com.adel.moviespoc.data.source.implementation.MoviesListDataSourceImpl
-import com.adel.moviespoc.data.source.interfaces.MoviesDetailsDataSource
-import com.adel.moviespoc.data.source.interfaces.MoviesListDataSource
-import com.adel.moviespoc.domain.repositories.MoviesRepository
-import com.adel.moviespoc.domain.repositories.MoviesRepositoryImpl
-import com.adel.moviespoc.ui.screens.details.DetailsViewModel
-import com.adel.moviespoc.ui.screens.list.MoviesListViewModel
+import com.adel.bussiness.repositories.MoviesRepository
+import com.adel.bussiness.repositories.MoviesRepositoryImpl
+import com.adel.data.BuildConfig
+import com.adel.presentation.screens.details.DetailsViewModel
+import com.adel.presentation.screens.list.MoviesListViewModel
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,13 +17,27 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 val networkModule = module {
     single { moshi() }
     single { okHttpClient(get()) }
-    single { KeyInterceptor() }
+    single { com.adel.data.interceptors.KeyInterceptor() }
     single { retrofit(BuildConfig.SERVER_URL, get(), get()) }
     single { createMovieService(get()) }
 
-    single<MoviesListDataSource> { MoviesListDataSourceImpl(get()) }
-    single<MoviesDetailsDataSource> { MoviesDetailsDataSourceImpl(get()) }
-    single<MoviesRepository> { MoviesRepositoryImpl(get(), get()) }
+    single<com.adel.data.source.interfaces.MoviesListDataSource> {
+        com.adel.data.source.implementation.MoviesListDataSourceImpl(
+            get()
+        )
+    }
+    single<com.adel.data.source.interfaces.MoviesDetailsDataSource> {
+        com.adel.data.source.implementation.MoviesDetailsDataSourceImpl(
+            get()
+        )
+    }
+    single<MoviesRepository> {
+        MoviesRepositoryImpl(
+            get(),
+            get()
+        )
+    }
+
     viewModelOf(::MoviesListViewModel)
     viewModelOf(::DetailsViewModel)
 
@@ -45,7 +53,7 @@ fun retrofit(baseUrl: String, okHtpClient: OkHttpClient, moshi: Moshi): Retrofit
         .build()
 }
 
-private fun okHttpClient(keyInterceptor: KeyInterceptor): OkHttpClient {
+private fun okHttpClient(keyInterceptor: com.adel.data.interceptors.KeyInterceptor): OkHttpClient {
     val logging = HttpLoggingInterceptor()
     logging.setLevel(HttpLoggingInterceptor.Level.BODY)
     return OkHttpClient.Builder().addInterceptor(logging).addInterceptor(keyInterceptor).build()
@@ -56,6 +64,6 @@ private fun moshi(): Moshi {
 }
 
 
-fun createMovieService(retrofit: Retrofit): MoviesService {
-    return retrofit.create(MoviesService::class.java)
+fun createMovieService(retrofit: Retrofit): com.adel.data.services.MoviesService {
+    return retrofit.create(com.adel.data.services.MoviesService::class.java)
 }
