@@ -1,7 +1,7 @@
 package com.adel.data.services
 
-import com.adel.data.models.MovieDetailsDto
-import com.adel.data.models.MoviesResponse
+import com.adel.data.dto.MovieDetailsDto
+import com.adel.data.dto.MoviesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

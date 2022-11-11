@@ -1,7 +1,7 @@
 package com.adel.data.source.interfaces
 
 import arrow.core.Either
-import com.adel.data.models.MovieDetailsDto
+import com.adel.data.dto.MovieDetailsDto
 import com.adel.models.AppFailure
 import com.adel.models.values.MovieId
 

@@ -1,4 +1,4 @@
-package com.adel.data.models
+package com.adel.data.dto
 
 
 import com.squareup.moshi.Json

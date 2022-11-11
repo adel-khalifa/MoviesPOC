@@ -1,7 +1,7 @@
 package com.adel.domain.mapper
 
-import com.adel.data.models.MovieDetailsDto
-import com.adel.data.models.MovieDto
+import com.adel.data.dto.MovieDetailsDto
+import com.adel.data.dto.MovieDto
 import com.adel.models.Movie
 import com.adel.models.MovieDetails
 import com.adel.models.MovieGenres
